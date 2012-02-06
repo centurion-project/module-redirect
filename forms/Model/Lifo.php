@@ -9,7 +9,7 @@ class Redirect_Form_Model_Lifo extends Centurion_Form_Model_Abstract
         $this->_model = Centurion_Db::getSingleton('redirect/lifo');
 
         $this->_elementLabels = array(
-            'new_url'            =>  $this->_translate('New Url'),
+            'new_url' =>  $this->_translate('New Url'),
         );
 
         $this->setLegend($this->_translate('Edit User'));

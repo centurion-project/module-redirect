@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `redirect_lifo` (
   `proxy_model` int(11) unsigned NOT NULL,
   `proxy_pk` int(11) unsigned NOT NULL,
   `old_permalink` varchar(255) NOT NULL,
+  `new_url` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL default '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),

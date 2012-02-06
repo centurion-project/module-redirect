@@ -4,15 +4,6 @@ class Redirect_Bootstrap extends Centurion_Application_Module_Bootstrap
 {
     protected $_savedPermalink = array();
 
-    protected function _initSignal()
-    {
-        Centurion_Signal::factory('pre_delete')->connect(array($this, 'deleteRow'), 'Centurion_Db_Table_Row_Abstract');
-        Centurion_Signal::factory('pre_update')->connect(array($this, 'preUpdate'), 'Centurion_Db_Table_Row_Abstract');
-        Centurion_Signal::factory('post_update')->connect(array($this, 'postUpdate'), 'Centurion_Db_Table_Row_Abstract'
-        );
-    }
-
-
     protected function _initPlugins()
     {
         $this->bootstrap('FrontController');
@@ -20,9 +11,11 @@ class Redirect_Bootstrap extends Centurion_Application_Module_Bootstrap
         $front->registerPlugin(new Redirect_Model_Plugin_ErrorControllerBootstrap());
     }
 
-    public function getKey($row)
+    protected function _initSignal()
     {
-        return sprintf('%s_%s', get_class($row), spl_object_hash($row));
+        Centurion_Signal::factory('pre_delete')->connect(array($this, 'deleteRow'), 'Centurion_Db_Table_Row_Abstract');
+        Centurion_Signal::factory('pre_update')->connect(array($this, 'preUpdate'), 'Centurion_Db_Table_Row_Abstract');
+        Centurion_Signal::factory('post_update')->connect(array($this, 'postUpdate'), 'Centurion_Db_Table_Row_Abstract');
     }
 
     public function deleteRow($signal, Centurion_Db_Table_Row_Abstract $row)
@@ -31,19 +24,26 @@ class Redirect_Bootstrap extends Centurion_Application_Module_Bootstrap
             return;
         }
 
-        if (trim($row->permalink) !== '') {
+        if ('' !== trim($row->permalink)) {
             Centurion_Db::getSingleton('redirect/lifo')->push($row->permalink, null);
         }
     }
 
+    /**
+     * We temporaly save the permalink, because in postUpdate, permalink will already have been change
+     * @param unknown_type $signal
+     * @param Centurion_Db_Table_Row_Abstract $row
+     */
     public function preUpdate($signal, Centurion_Db_Table_Row_Abstract $row)
     {
         if (!($row instanceof Redirect_Model_DbTable_Row_Interface)) {
             return;
         }
 
-        $key = $this->getKey($row);
+        $key = Centurion_Inflector::id($row);
+        //We clone, in order to make reset without changing the row that will be saved after the signal
         $row = clone $row;
+        //We reset because, if not, the permalink will be the new one and not the old one
         $row->reset();
 
         $this->_savedPermalink[$key] = $row->permalink;
@@ -54,9 +54,11 @@ class Redirect_Bootstrap extends Centurion_Application_Module_Bootstrap
         if (!($row instanceof Redirect_Model_DbTable_Row_Interface)) {
             return;
         }
-        $savedPermalink = $this->_savedPermalink[$this->getKey($row)];
+        
+        $key = Centurion_Inflector::id($row);
+        $savedPermalink = $this->_savedPermalink[$key];
 
-        if ($this->_savedPermalink[$this->getKey($row)] !== $row->permalink && trim($savedPermalink) !== '') {
+        if ($savedPermalink !== $row->permalink && '' !== trim($savedPermalink)) {
             Centurion_Db::getSingleton('redirect/lifo')->push($savedPermalink, $row);
         }
     }

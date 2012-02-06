@@ -11,8 +11,9 @@ class Redirect_Model_DbTable_Row_Lifo extends Centurion_Db_Table_Row
     public function getProxy()
     {
         if (null === $this->_proxy) {
-            if (null !== $this->proxymodel)
+            if (null !== $this->proxymodel) {
                 $this->_getProxy($this->proxymodel->name, $this->proxy_pk);
+            }
         }
         
         return $this->_proxy;
