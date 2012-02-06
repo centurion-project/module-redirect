@@ -1,6 +1,6 @@
 <?php
 
-class History_Model_DbTable_Row_Lifo extends Centurion_Db_Table_Row
+class Redirect_Model_DbTable_Row_Lifo extends Centurion_Db_Table_Row
 {
     protected $_proxy = null;
     /**

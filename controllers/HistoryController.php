@@ -1,5 +1,5 @@
 <?php
-class History_HistoryController extends Centurion_Controller_Action
+class Redirect_HistoryController extends Centurion_Controller_Action
 {
     public function historyAction()
     {

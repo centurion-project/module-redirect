@@ -1,5 +1,5 @@
 <?php
-class History_AdminLogController extends Centurion_Controller_CRUD
+class Redirect_AdminLogController extends Centurion_Controller_CRUD
 {
     public function preDispatch()
     {
@@ -11,9 +11,9 @@ class History_AdminLogController extends Centurion_Controller_CRUD
 
     public function init()
        {
-           $this->_model = Centurion_Db::getSingleton('history/log');
+           $this->_model = Centurion_Db::getSingleton('redirect/log');
 
-           $this->_formClassName = 'History_Form_Model_Log';
+           $this->_formClassName = 'Redirect_Form_Model_Log';
 
            $this->view->placeholder('headling_1_content')->set($this->view->translate('Manage log'));
            $this->view->placeholder('headling_1_add_button')->set($this->view->translate('log'));

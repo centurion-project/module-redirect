@@ -1,12 +1,12 @@
 <?php
 
-class History_Form_Model_Lifo extends Centurion_Form_Model_Abstract
+class Redirect_Form_Model_Lifo extends Centurion_Form_Model_Abstract
 {
     protected $_oldUrl = null;
 
     public function __construct($options = array())
     {
-        $this->_model = Centurion_Db::getSingleton('history/lifo');
+        $this->_model = Centurion_Db::getSingleton('redirect/lifo');
 
         $this->_elementLabels = array(
             'new_url'            =>  $this->_translate('New Url'),

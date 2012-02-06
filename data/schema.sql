@@ -1,7 +1,7 @@
 SET FOREIGN_KEY_CHECKS=0;
 
-DROP TABLE IF EXISTS `history_lifo`;
-CREATE TABLE IF NOT EXISTS `history_lifo` (
+DROP TABLE IF EXISTS `redirect_lifo`;
+CREATE TABLE IF NOT EXISTS `redirect_lifo` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `proxy_model` int(11) unsigned NOT NULL,
   `proxy_pk` int(11) unsigned NOT NULL,
@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS `history_lifo` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 
-DROP TABLE IF EXISTS `history_log`;
-CREATE TABLE IF NOT EXISTS `history_log` (
+DROP TABLE IF EXISTS `redirect_log`;
+CREATE TABLE IF NOT EXISTS `redirect_log` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `url` varchar(255) CHARACTER SET utf8 NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',

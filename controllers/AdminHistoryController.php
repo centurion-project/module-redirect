@@ -1,5 +1,5 @@
 <?php
-class History_AdminHistoryController extends Centurion_Controller_CRUD
+class Redirect_AdminHistoryController extends Centurion_Controller_CRUD
 {
 
 }

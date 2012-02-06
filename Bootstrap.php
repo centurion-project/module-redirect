@@ -1,6 +1,6 @@
 <?php
 
-class History_Bootstrap extends Centurion_Application_Module_Bootstrap
+class Redirect_Bootstrap extends Centurion_Application_Module_Bootstrap
 {
     protected $_savedPermalink = array();
 
@@ -17,7 +17,7 @@ class History_Bootstrap extends Centurion_Application_Module_Bootstrap
     {
         $this->bootstrap('FrontController');
         $front = $this->getResource('FrontController');
-        $front->registerPlugin(new History_Model_Plugin_ErrorControllerBootstrap());
+        $front->registerPlugin(new Redirect_Model_Plugin_ErrorControllerBootstrap());
     }
 
     public function getKey($row)
@@ -27,18 +27,18 @@ class History_Bootstrap extends Centurion_Application_Module_Bootstrap
 
     public function deleteRow($signal, Centurion_Db_Table_Row_Abstract $row)
     {
-        if (!($row instanceof History_Model_DbTable_Row_Interface)) {
+        if (!($row instanceof Redirect_Model_DbTable_Row_Interface)) {
             return;
         }
 
         if (trim($row->permalink) !== '') {
-            Centurion_Db::getSingleton('history/lifo')->push($row->permalink, null);
+            Centurion_Db::getSingleton('redirect/lifo')->push($row->permalink, null);
         }
     }
 
     public function preUpdate($signal, Centurion_Db_Table_Row_Abstract $row)
     {
-        if (!($row instanceof History_Model_DbTable_Row_Interface)) {
+        if (!($row instanceof Redirect_Model_DbTable_Row_Interface)) {
             return;
         }
 
@@ -51,13 +51,13 @@ class History_Bootstrap extends Centurion_Application_Module_Bootstrap
 
     public function postUpdate($signal, Centurion_Db_Table_Row_Abstract $row)
     {
-        if (!($row instanceof History_Model_DbTable_Row_Interface)) {
+        if (!($row instanceof Redirect_Model_DbTable_Row_Interface)) {
             return;
         }
         $savedPermalink = $this->_savedPermalink[$this->getKey($row)];
 
         if ($this->_savedPermalink[$this->getKey($row)] !== $row->permalink && trim($savedPermalink) !== '') {
-            Centurion_Db::getSingleton('history/lifo')->push($savedPermalink, $row);
+            Centurion_Db::getSingleton('redirect/lifo')->push($savedPermalink, $row);
         }
     }
 

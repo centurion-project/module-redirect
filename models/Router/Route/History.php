@@ -1,6 +1,6 @@
 <?php
 
-class History_Model_Router_Route_History extends Zend_Controller_Router_Route_Abstract
+class Redirect_Model_Router_Route_History extends Zend_Controller_Router_Route_Abstract
 {
     protected $_path = null;
 
@@ -18,14 +18,14 @@ class History_Model_Router_Route_History extends Zend_Controller_Router_Route_Ab
     {
         $this->_path = $path->getPathInfo();
         
-        $row = Centurion_Db::getSingleton('history/lifo')->findOneByOld_permalink($path->getPathInfo());
+        $row = Centurion_Db::getSingleton('redirect/lifo')->findOneByOld_permalink($path->getPathInfo());
         
         if ($row === null) {
             return null;
         } else {
             $path->setParam('history', $row);
-            $path->setParam('controller', 'history');
-            $path->setParam('module', 'history');
+            $path->setParam('controller', 'redirect');
+            $path->setParam('module', 'redirect');
             $path->setParam('action', 'history');
             return $path;
         }

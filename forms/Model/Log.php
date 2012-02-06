@@ -1,12 +1,12 @@
 <?php
 
-class History_Form_Model_Log extends Centurion_Form_Model_Abstract
+class Redirect_Form_Model_Log extends Centurion_Form_Model_Abstract
 {
     protected $_exclude = array('url', 'message', 'nb');
 
     public function __construct($options = array())
     {
-        $this->_model = Centurion_Db::getSingleton('history/log');
+        $this->_model = Centurion_Db::getSingleton('redirect/log');
 
         $this->_elementLabels = array(
             'lifo' => 'lifo'
@@ -19,7 +19,7 @@ class History_Form_Model_Log extends Centurion_Form_Model_Abstract
 
     public function init()
     {
-        $this->addReferenceSubForm(new History_Form_Model_Lifo(), 'lifo');
+        $this->addReferenceSubForm(new Redirect_Form_Model_Lifo(), 'lifo');
         parent::init();
     }
 

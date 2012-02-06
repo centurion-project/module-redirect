@@ -1,9 +1,9 @@
 <?php
 
-class History_Model_DbTable_Lifo extends Centurion_Db_Table_Abstract
+class Redirect_Model_DbTable_Lifo extends Centurion_Db_Table_Abstract
 {
-    protected $_name = 'history_lifo';
-    protected $_rowClass = 'History_Model_DbTable_Row_Lifo';
+    protected $_name = 'redirect_lifo';
+    protected $_rowClass = 'Redirect_Model_DbTable_Row_Lifo';
     
     public function push($permalink, $row = null)
     {
@@ -28,7 +28,7 @@ class History_Model_DbTable_Lifo extends Centurion_Db_Table_Abstract
         'log' => array(
                 'columns' => 'old_permalink',
                 'refColumns' => 'url',
-                'refTableClass' => 'History_Model_DbTable_Log',
+                'refTableClass' => 'Redirect_Model_DbTable_Log',
                 'onDelete'      => self::SET_NULL,
                 'onUpdate'      => self::CASCADE,
         )

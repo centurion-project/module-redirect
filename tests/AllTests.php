@@ -1,11 +1,11 @@
 <?php
 if (! defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'History_Test_AllTests::main');
+    define('PHPUnit_MAIN_METHOD', 'Redirect_Test_AllTests::main');
 }
 
 require_once dirname(__FILE__) . '/../../../../tests/TestHelper.php';
 
-class History_Test_AllTests
+class Redirect_Test_AllTests
 {
     public static function main ()
     {
@@ -14,12 +14,12 @@ class History_Test_AllTests
     
     public static function suite ()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Modules History');
+        $suite = new PHPUnit_Framework_TestSuite('Modules Redirect');
         
         return $suite;
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'History_Test_AllTests::main') {
+if (PHPUnit_MAIN_METHOD == 'Redirect_Test_AllTests::main') {
     Modules_AllTests::main();
 }
