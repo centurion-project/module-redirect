@@ -23,7 +23,7 @@ class Redirect_Model_Plugin_ErrorControllerBootstrap extends Zend_Controller_Plu
                     //If a redirection exist, we use them
                     if (null !== $row) {
                         $request->setParam('history', $row);
-                        $request->setControllerName('redirect');
+                        $request->setControllerName('history');
                         $request->setModuleName('redirect');
                         $request->setActionName('history');
 
