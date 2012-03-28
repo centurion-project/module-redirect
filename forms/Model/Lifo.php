@@ -17,6 +17,23 @@ class Redirect_Form_Model_Lifo extends Centurion_Form_Model_Abstract
         parent::__construct($options);
     }
 
+    public function init()
+    {
+        $this->_elementLabels['old_permalink'] = $this->_translate('Old url');
+        $this->addElement('text', 'old_permalink', array('description' => 'Must be relative', 'label' => $this->_elementLabels['old_permalink']));
+    }
+
+    public function setInstance(Centurion_Db_Table_Row_Abstract $instance = null) {
+       $return = parent::setInstance($instance);
+
+        if (null !== $instance) {
+            $this->getElement('old_permalink')->setAttrib('disabled', true);
+            $this->getElement('old_permalink')->setDescription(null);
+        }
+
+        return $return;
+    }
+
     public function setOldUrl($url) {
         $this->_oldUrl = $url;
     }
