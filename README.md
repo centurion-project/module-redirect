@@ -8,7 +8,8 @@ It will store in BDD all old url (if admin change the slug, or a category change
 # Implementation
 
 - add the module to your project
-- implement the interface Redirect_Model_DbTable_Row_Interface, in row that you want to be 
+- activate the module "redirect" in the file modules.ini
+- implement the interface Redirect_Model_DbTable_Row_Interface, in row that you want to be watch by this module
 
 
 # TODO
