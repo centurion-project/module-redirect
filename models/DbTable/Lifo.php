@@ -29,8 +29,6 @@ class Redirect_Model_DbTable_Lifo extends Centurion_Db_Table_Abstract
                 'columns' => 'old_permalink',
                 'refColumns' => 'url',
                 'refTableClass' => 'Redirect_Model_DbTable_Log',
-                'onDelete'      => self::SET_NULL,
-                'onUpdate'      => self::CASCADE,
         )
     );
 }
