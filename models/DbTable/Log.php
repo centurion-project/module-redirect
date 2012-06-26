@@ -2,6 +2,8 @@
 
 class Redirect_Model_DbTable_Log extends Centurion_Db_Table_Abstract
 {
+    protected $_rowClass = 'Redirect_Model_DbTable_Row_Log';
+    
     protected $_referenceMap = array(
         'lifo'   =>  array(
             'columns'       => 'url',

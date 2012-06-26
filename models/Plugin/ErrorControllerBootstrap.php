@@ -11,7 +11,7 @@ class Redirect_Model_Plugin_ErrorControllerBootstrap extends Zend_Controller_Plu
     public function postDispatch(Zend_Controller_Request_Abstract $request) {
         $response = $this->getResponse();
 
-        if ($response->isException()) {
+        if ($response->isException() && (410 != $response->getHttpResponseCode())) {
             $datas = array();
 
             $exceptions = $response->getException();

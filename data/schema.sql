@@ -3,8 +3,8 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `redirect_lifo`;
 CREATE TABLE IF NOT EXISTS `redirect_lifo` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `proxy_model` int(11) unsigned NOT NULL,
-  `proxy_pk` int(11) unsigned NOT NULL,
+  `proxy_model` int(11) unsigned DEFAULT NULL,
+  `proxy_pk` int(11) unsigned DEFAULT NULL,
   `old_permalink` varchar(255) NOT NULL,
   `new_url` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL default '0000-00-00 00:00:00',

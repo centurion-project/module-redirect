@@ -34,6 +34,7 @@ class Redirect_HistoryController extends Centurion_Controller_Action
     public function historyAction()
     {
         $history = $this->_getParam('history');
+        
         if ($history == null || !($history instanceof Centurion_Db_Table_Row_Abstract)) {
             throw new Centurion_Controller_Action_Exception();
         }
@@ -42,8 +43,11 @@ class Redirect_HistoryController extends Centurion_Controller_Action
         } else if (null !== ($row = $history->getProxy())) {
             $this->_redirect($row->permalink, array('code' => 301));
         } else {
-            $this->view->message = 'Sorry, this ressource no longer exists.';
-            throw new Centurion_Controller_Action_Gone_Exception('Ressource has gone', 410);
+            $this->getResponse()->setHttpResponseCode(410);
+            $this->getHelper('layout')->disableLayout();
+            $this->getHelper('ViewRenderer')->setNoRender();
+            $this->getResponse()->sendHeaders();
+            die();
         }
     }
 }

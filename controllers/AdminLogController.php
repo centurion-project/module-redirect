@@ -53,12 +53,41 @@ class Redirect_AdminLogController extends Centurion_Controller_CRUD
                                 'subtitle' => 'message',
                 ),
             ),
-            'left|lifo__new_url'     => $this->view->translate('Redirected ?'),
+            'is_redirected'     => $this->view->translate('Redirected ?'),
             'created_at'       => $this->view->translate('First Time'),
             'updated_at'       => $this->view->translate('Last time'),
             'nb'               => $this->view->translate('Number'),
         );
 
+        $this->_filters = array (
+            'treated'       => array(
+                'type'  => self::FILTER_TYPE_SELECT,
+                'behavior' => self::FILTER_BEHAVIOR_CALLBACK,
+                'column' => 'left|lifo__id',
+                'callback' => array($this, 'isNull'),
+                'data'  => array(
+                    '' => NULL,
+                    '0' => $this->view->translate('Non'),
+                    '1' => $this->view->translate('Oui')
+                ),
+                'label' => $this->view->translate('Is treated ?')
+            ),
+        );
+
         parent::init();
    }
+    
+    public function isNull($value, $sqlFilter)
+    {
+        switch ($value) {
+            case '0':
+                $sqlFilter['left|lifo__id__isnull'] = '';
+                break;
+            case '1':
+                $sqlFilter['!left|lifo__id__isnull'] = '';
+                break;
+            default:
+                break;
+        }
+    }
 }
